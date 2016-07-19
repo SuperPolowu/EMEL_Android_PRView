@@ -1,21 +1,26 @@
 package com.example.polo.practionresulttest;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-
+import java.text.DateFormat;
 import android.widget.TextView;
 import android.util.Log;
 import android.widget.ImageView;
 import java.util.Date;
+import android.location.LocationManager;
+import android.location.Location;
+import android.content.Context;
 import android.widget.RelativeLayout;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class PractionResultView extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getName();
@@ -70,10 +75,17 @@ public class PractionResultView extends AppCompatActivity {
         setPractionResult(6);
     }
 
+    @OnClick(R.id.btn_Close)
+    void onButtonClick() {
 
+    }
     private void setPractionResult(int p_Star) {
 
         Log.v(TAG, "setPractionResult");
+
+        ((TextView)findViewById(R.id.lb_Score_Title)).setText(intent.getStringExtra("score_Title"));
+        ((TextView)findViewById(R.id.lb_Composer)).setText(intent.getStringExtra("composer"));
+        setTime();
         setAverage();
         setAccuracy();
         setCompletion();
@@ -83,9 +95,10 @@ public class PractionResultView extends AppCompatActivity {
     }
     private  void setTime(){
 
-//        Date date = new Date(location.getTime());
-//        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
-//        mTimeText.setText("Time: " + dateFormat.format(date));
+
+        Date date = new Date();
+        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
+        ((TextView)findViewById(R.id.lb_Time)).setText(dateFormat.format(date));
 
     }
     private  void setAverage(){

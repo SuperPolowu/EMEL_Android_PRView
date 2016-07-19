@@ -28,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("average", 78);
         intent.putExtra("accuracy", 60);
         intent.putExtra("completion", 100);
-
+        intent.putExtra("score_Title", "巴赫初步鋼琴曲集上冊No.1小步舞曲");
+        intent.putExtra("composer", "巴赫");
         startActivity(intent);
+        finish();
     }
 }
