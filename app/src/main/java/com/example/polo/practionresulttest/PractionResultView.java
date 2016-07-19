@@ -11,10 +11,7 @@ import android.widget.TextView;
 import android.util.Log;
 import android.widget.ImageView;
 import java.util.Date;
-import android.location.LocationManager;
-import android.location.Location;
-import android.content.Context;
-import android.widget.RelativeLayout;
+
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
@@ -101,6 +98,7 @@ public class PractionResultView extends AppCompatActivity {
         ((TextView)findViewById(R.id.lb_Time)).setText(dateFormat.format(date));
 
     }
+
     private  void setAverage(){
         String averageStr;
         if(average<50){

@@ -33,7 +33,6 @@
                 //歌曲名稱
                 <TextView
                     android:id="@+id/lb_Score_Title"
-
                     android:scaleType="centerCrop"
                     android:layout_gravity="center_vertical"
                     android:layout_width="265dp"
@@ -514,6 +513,14 @@
                     android:layout_height="32dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="60dp" />
+                //XP旗子
+                <ImageView
+                    android:src="@drawable/flag"
+                    android:scaleType="centerCrop"
+                    android:layout_width="30dp"
+                    android:layout_height="55dp"
+                    android:layout_marginLeft="251.5dp"
+                    android:layout_marginTop="33.7dp" />
                 //小鱷魚
                 <ImageView
                     android:id="@+id/xp_Character"
