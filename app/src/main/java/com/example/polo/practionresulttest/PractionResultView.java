@@ -2,6 +2,7 @@ package com.example.polo.practionresulttest;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,9 +14,10 @@ import android.widget.ImageView;
 import java.util.Date;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
+import android.view.animation.TranslateAnimation;
 import android.os.Bundle;
 import android.widget.FrameLayout;
-
+import android.widget.RelativeLayout;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -30,6 +32,8 @@ public class PractionResultView extends AppCompatActivity {
     private int average;
     private int accuracy;
     private int completion;
+    private float characterDistance;
+    private AnimationDrawable animationCharacter;
     public enum FaceEnum
     {
         averageFace,accuracyFace,completionFace;
@@ -38,10 +42,10 @@ public class PractionResultView extends AppCompatActivity {
             ImageView xp_Progress_Bg;
 
     @Bind(R.id.xp_Progress)
-            ImageView xp_Progress;
+            FrameLayout xp_Progress;
 
     @Bind(R.id.xp_Character)
-            ImageView xp_Character;
+             ImageView xp_Character;
 
     @Bind(R.id.xp_Cup)
             ImageView xp_Cup;
@@ -198,12 +202,48 @@ public class PractionResultView extends AppCompatActivity {
         TextView lb_XP = (TextView)findViewById(R.id.lb_Xp);
         lb_XP.setText(String.valueOf(totalXPScore) +"/"+String.valueOf(thresholdXPScore));
         FrameLayout.LayoutParams xp_Progress_Bg＿Params = (FrameLayout.LayoutParams)xp_Progress_Bg.getLayoutParams();
-        FrameLayout.LayoutParams xp_Progress_Params = (FrameLayout.LayoutParams)xp_Progress.getLayoutParams();
-        FrameLayout.LayoutParams xp_Character_Params = (FrameLayout.LayoutParams)xp_Character.getLayoutParams();
-        xp_Progress_Params.width=(int)(((float)xp_Progress_Bg＿Params.width/100)*xp_Percentage);
-        xp_Character.setX(xp_Progress_Params.width-(xp_Character_Params.width/2+26));
-        Log.v("xp_Character X",String.valueOf(xp_Character.getX()));
-        Log.v("xp_Progress X",String.valueOf(xp_Progress.getX()));
+        FrameLayout.LayoutParams xp_Character＿Params = (FrameLayout.LayoutParams)xp_Character.getLayoutParams();
+        ResizeWidthAnimation anim = new ResizeWidthAnimation(xp_Progress,(int)(((float)xp_Progress_Bg＿Params.width/100)*xp_Percentage));
+        anim.setDuration(1000);
+        xp_Progress.startAnimation(anim);
+        characterDistance=(((float)xp_Progress_Bg＿Params.width/100)*xp_Percentage-xp_Character＿Params.width/2);
+        if (characterDistance<0)characterDistance=0;
+
+        xp_Character.setBackgroundResource(R.drawable.character_progress_animation);
+        animationCharacter=(AnimationDrawable) xp_Character.getBackground();
+
+        Animation am = new TranslateAnimation(0.0f,characterDistance,0.0f, 0.0f);
+        am.setAnimationListener(new Animation.AnimationListener(){
+            @Override
+            public void onAnimationStart(Animation arg0) {
+            }
+            @Override
+            public void onAnimationRepeat(Animation arg0) {
+            }
+            @Override
+            public void onAnimationEnd(Animation arg0) {
+                animationCharacter.stop();
+            }
+        });
+        am.setDuration( 2000 );
+        am.setFillAfter(true);
+        xp_Character.setAnimation(am);
+        am.startNow();
+        animationCharacter.start();
+
+
+
+
+
+
+//        if (characterDistance>xp_Character＿Params.width){
+//            ResizeWidthAnimation animCharacter = new ResizeWidthAnimation(xp_Character,characterDistance);
+//            animCharacter.setDuration(800);
+//            xp_Character.startAnimation(animCharacter);
+//        }
+
+
+
         int cap_Normal_ID = getResources().getIdentifier("cup_"+ScoreLevelCups[level]+"_hide", "drawable", this.getPackageName());
         int cap_Focus_ID = getResources().getIdentifier("cup_"+ScoreLevelCups[level]+"_normal", "drawable", this.getPackageName());
         if (p_Star == scoreLevelStars[level]&& totalXPScore==thresholdXPScore){

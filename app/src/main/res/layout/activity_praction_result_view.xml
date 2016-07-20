@@ -438,11 +438,14 @@
                 </RelativeLayout>>
             </RelativeLayout>>
             //第三區塊
-            <FrameLayout
+            <RelativeLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:tools="http://schemas.android.com/tools"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="177dp">
+                android:layout_height="177dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                >
                 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:tools="http://schemas.android.com/tools"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -487,24 +490,45 @@
                     </TableRow>
 
                 </TableLayout>
-                //XP路的背景圖
-                <ImageView
-                    android:id="@+id/xp_Progress_Bg"
-                    android:src="@drawable/road_hide"
-                    android:scaleType="centerCrop"
+
+
+                //總成績進度條
+                <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:tools="http://schemas.android.com/tools"
+                    android:orientation="vertical"
                     android:layout_width="242dp"
                     android:layout_height="28dp"
                     android:layout_marginLeft="26dp"
-                    android:layout_marginTop="62dp" />
-                //XP路的圖
-                <ImageView
+                    android:layout_marginTop="62dp">
+                    //XP路的背景圖
+                    <ImageView
+                        android:id="@+id/xp_Progress_Bg"
+                        android:src="@drawable/road_hide"
+                        android:scaleType="centerCrop"
+                        android:layout_width="242dp"
+                        android:layout_height="28dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginTop="0dp" />
+                </FrameLayout>
+                <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:tools="http://schemas.android.com/tools"
                     android:id="@+id/xp_Progress"
-                    android:src="@drawable/road_normal"
-                    android:scaleType="centerCrop"
+                    android:orientation="vertical"
                     android:layout_width="242dp"
-                    android:layout_height="30dp"
+                    android:layout_height="28dp"
                     android:layout_marginLeft="26dp"
-                    android:layout_marginTop="61dp" />
+                    android:layout_marginTop="61dp">
+                    //XP路的圖
+                    <ImageView
+                        android:src="@drawable/road_normal"
+                        android:scaleType="centerCrop"
+                        android:layout_width="242dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginTop="0dp" />
+                </FrameLayout>
+
+
+
+
                 //XP icon
                 <ImageView
                     android:src="@drawable/icon_xp"
@@ -521,18 +545,26 @@
                     android:layout_height="55dp"
                     android:layout_marginLeft="251.5dp"
                     android:layout_marginTop="33.7dp" />
-                //小鱷魚
-                <ImageView
-                    android:id="@+id/xp_Character"
-                    android:src="@drawable/character"
-                    android:scaleType="centerCrop"
-                    android:layout_width="67dp"
-                    android:layout_height="70dp"
-                    android:layout_marginTop="18.5dp"
-
-                    />
 
 
+                <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:tools="http://schemas.android.com/tools"
+                    android:orientation="vertical"
+                    android:layout_width="275dp"
+                    android:layout_height="90dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="18dp">
+                    //小鱷魚
+                    <ImageView
+
+                        android:id="@+id/xp_Character"
+                        android:scaleType="centerCrop"
+                        android:layout_width="67dp"
+                        android:layout_height="70dp"
+                        android:layout_marginTop="0dp"
+
+                        />
+
+                </FrameLayout>
 
                 //經驗值的數字
                 <TextView
@@ -625,7 +657,7 @@
                 </TableLayout>>
 
 
-            </FrameLayout>>
+            </RelativeLayout>>
         </LinearLayout>
     </ScrollView>>
     //Navigation Bar
