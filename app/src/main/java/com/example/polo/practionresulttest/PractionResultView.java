@@ -11,7 +11,8 @@ import android.widget.TextView;
 import android.util.Log;
 import android.widget.ImageView;
 import java.util.Date;
-
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
@@ -74,7 +75,7 @@ public class PractionResultView extends AppCompatActivity {
 
     @OnClick(R.id.btn_Close)
     void onButtonClick() {
-
+        finish();
     }
     private void setPractionResult(int p_Star) {
 
@@ -83,12 +84,15 @@ public class PractionResultView extends AppCompatActivity {
         ((TextView)findViewById(R.id.lb_Score_Title)).setText(intent.getStringExtra("score_Title"));
         ((TextView)findViewById(R.id.lb_Composer)).setText(intent.getStringExtra("composer"));
         setTime();
-        setAverage();
-        setAccuracy();
-        setCompletion();
+
+
         setXP(p_Star);
         setStarImage(p_Star,scoreLevelStars[level]);
 
+        setAccuracy();
+        setCompletion();
+
+        setAverage();
     }
     private  void setTime(){
 
@@ -156,7 +160,17 @@ public class PractionResultView extends AppCompatActivity {
         FrameLayout.LayoutParams progress_Bg_Params = (FrameLayout.LayoutParams)progress_Bg.getLayoutParams();
         FrameLayout.LayoutParams progress_Params = (FrameLayout.LayoutParams)progress.getLayoutParams();
 
-        progress_Params.width=(progress_Bg_Params.width/5)*(int)score;
+//        progress_Params.width=(progress_Bg_Params.width/5)*(int)score;
+
+
+        ResizeWidthAnimation anim = new ResizeWidthAnimation(progress, (progress_Bg_Params.width/5)*(int)score);
+        anim.setDuration(500*(int)score);
+        progress.startAnimation(anim);
+
+
+
+
+
         for (int i = 1; i <= 5 ; i++) {
             Log.v("tag",String.valueOf(i+tag));
             int resId = getResources().getIdentifier("face_" + (i+tag), "id", getPackageName());
@@ -225,5 +239,28 @@ public class PractionResultView extends AppCompatActivity {
             }
         }
 
+    }
+    //改變寬度的動畫效果
+    public class ResizeWidthAnimation extends Animation {
+        private int mWidth;
+        private int mStartWidth;
+        private View mView;
+
+        public ResizeWidthAnimation(View view, int width) {
+            mView = view;
+            mWidth = width;
+            mStartWidth = view.getWidth();
+        }
+
+        @Override
+        protected void applyTransformation(float interpolatedTime, Transformation t) {
+            mView.getLayoutParams().width = mStartWidth + (int) ((mWidth - mStartWidth) * interpolatedTime);
+            mView.requestLayout();
+        }
+
+        @Override
+        public boolean willChangeBounds() {
+            return true;
+        }
     }
 }

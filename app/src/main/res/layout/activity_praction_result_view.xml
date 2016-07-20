@@ -153,7 +153,7 @@
                     //進度條色塊
                     <ImageView xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:tools="http://schemas.android.com/tools"
                         android:id="@+id/progress1"
-                        android:layout_width="100dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="17dp"
                         android:background="@drawable/pr_progress_blue_shape"
@@ -264,7 +264,7 @@
                         //進度條色塊
                         <ImageView xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:tools="http://schemas.android.com/tools"
                             android:id="@+id/progress11"
-                            android:layout_width="100dp"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
                             android:layout_marginLeft="7dp"
@@ -365,7 +365,7 @@
                         //進度條色塊
                         <ImageView xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:tools="http://schemas.android.com/tools"
                             android:id="@+id/progress21"
-                            android:layout_width="100dp"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
                             android:layout_marginLeft="7dp"

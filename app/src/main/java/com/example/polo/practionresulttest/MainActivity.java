@@ -31,6 +31,6 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("score_Title", "巴赫初步鋼琴曲集上冊No.1小步舞曲");
         intent.putExtra("composer", "巴赫");
         startActivity(intent);
-        finish();
+//        finish();
     }
 }
