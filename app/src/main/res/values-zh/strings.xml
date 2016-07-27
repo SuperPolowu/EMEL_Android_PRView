@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    //挑戰成績單
+    <string name="rating6">精彩演出</string>
+    <string name="rating5">表現優秀</string>
+    <string name="rating4">有模有樣</string>
+    <string name="rating3">漸入佳境</string>
+    <string name="rating2">好的起步</string>
+    <string name="rating1">有待加强</string>
+    <string name="below50">50分以下</string>
+    <string name="Play_result">彈奏結果</string>
+    <string name="Overall">總表現</string>
+    <string name="Accuracy">準確度</string>
+    <string name="Completion">完成度</string>
+    <string name="Target">目標</string>
+    <string name="Minutes">分鐘</string>
+</resources>

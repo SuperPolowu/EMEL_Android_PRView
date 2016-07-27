@@ -90,7 +90,7 @@
                 android:layout_alignParentRight="true">
                 <TextView
                     android:id="@+id/lb_PlayResult_Title"
-                    android:text="彈奏結果"
+                    android:text="@string/Play_result"
                     android:scaleType="centerCrop"
                     android:layout_width="265dp"
                     android:layout_height="42dp"
@@ -113,19 +113,30 @@
                     >
                     <TextView
                         android:id="@+id/lb_Meessage"
-                        android:text="漸入佳境"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="98dp"
-                        android:layout_marginTop="7dp"
+                        android:text="@string/rating1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:textSize="20sp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentRight="true"
+                        android:gravity="center"
+                        android:layout_gravity="center_vertical"
                         android:textColor="#ffffff" />
                 </FrameLayout>>
+                //播放按鈕
+                <ImageButton
+                    android:id="@+id/btn_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_play"
+                    android:background="#00000000"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="36dp"
+                    />
                 <TextView
                     android:id="@+id/lb_Average_Title"
-                    android:text="總表現"
+                    android:text="@string/Overall"
                     android:layout_width="44dp"
                     android:layout_height="14dp"
                     android:layout_marginTop="82dp"
@@ -210,13 +221,13 @@
                 //總成績分數
                 <TextView
                     android:id="@+id/lb_Average"
-                    android:text="50以下"
-                    android:gravity="right"
-
+                    android:text="@string/below50"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="52dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="116dp"
+                    android:layout_height="36dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="101dp"
                     android:textSize="14sp"
                     android:layout_alignParentRight="true"
                     android:textColor="#5f5f5f" />
@@ -236,7 +247,7 @@
                     //準確度---------------
                     <TextView
                         android:id="@+id/lb_Accuracy_Title"
-                        android:text="準確度"
+                        android:text="@string/Accuracy"
                         android:layout_width="44dp"
                         android:layout_height="14dp"
                         android:layout_marginTop="10dp"
@@ -323,11 +334,12 @@
                     <TextView
                         android:id="@+id/lb_Accuracy"
                         android:text="63"
-                        android:gravity="right"
-                        android:layout_marginRight="10dp"
-                        android:layout_width="44dp"
-                        android:layout_height="14dp"
-                        android:layout_marginTop="43dp"
+                        android:gravity="center"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginRight="4dp"
+                        android:layout_width="52dp"
+                        android:layout_height="36dp"
+                        android:layout_marginTop="30.6dp"
                         android:textSize="14sp"
                         android:textColor="#5f5f5f"
                         android:layout_alignParentRight="true"
@@ -338,7 +350,7 @@
                     //完成度---------------
                     <TextView
                         android:id="@+id/lb_Completion_Title"
-                        android:text="完成度"
+                        android:text="@string/Completion"
                         android:layout_width="44dp"
                         android:layout_height="14dp"
                         android:layout_marginTop="70dp"
@@ -424,17 +436,131 @@
                     <TextView
                         android:id="@+id/lb_Completion"
                         android:text="85"
-                        android:gravity="right"
-                        android:layout_width="44dp"
-                        android:layout_height="14dp"
-                        android:layout_marginTop="102dp"
-                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="52dp"
+                        android:layout_height="36dp"
+                        android:layout_marginTop="90dp"
+                        android:layout_marginRight="4dp"
                         android:textSize="14sp"
                         android:textColor="#5f5f5f"
                         android:layout_alignParentRight="true"
                         />
                     //完成度---------------
 
+                    //其他
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="131dp"
+                        android:stretchColumns="0,2">
+                        <TableRow>
+                            <RelativeLayout
+                                xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:tools="http://schemas.android.com/tools"
+                                android:orientation="vertical"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                android:layout_centerInParent="true"
+                                >
+                                //時間
+                                <ImageView
+                                    android:src="@drawable/icon_time"
+                                    android:scaleType="centerInside"
+                                    android:layout_width="21dp"
+                                    android:layout_height="23dp"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginTop="0dp"
+                                    />
+                                <TextView
+                                    android:id="@+id/lb_Duration"
+                                    android:text="03:10"
+                                    android:gravity="right"
+                                    android:layout_width="44dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="45dp"
+                                    android:layout_marginLeft="46dp"
+                                    android:textSize="14sp"
+                                    android:textColor="#5f5f5f"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_centerInParent="true"
+                                    />
+                                <TextView
+                                    android:id="@+id/lb_Duration_Title"
+                                    android:text="@string/Minutes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="45dp"
+                                    android:textSize="14sp"
+                                    android:textColor="#5f5f5f"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_marginLeft="110dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_centerInParent="true"
+                                    />
+                            </RelativeLayout>
+                            //分隔線
+                            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:tools="http://schemas.android.com/tools"
+                                android:orientation="vertical"
+                                android:layout_width="1dp"
+                                android:layout_height="23dp"
+                                android:background="#dcdcdc"
+                                android:layout_centerInParent="true"
+                                android:layout_marginTop="2dp"
+                                />
+                            <RelativeLayout
+                                xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:tools="http://schemas.android.com/tools"
+                                android:orientation="vertical"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                android:layout_centerInParent="true"
+                                >
+                                //BPM
+                                <ImageView
+                                    android:src="@drawable/icon_bpm"
+                                    android:scaleType="centerInside"
+                                    android:layout_width="21dp"
+                                    android:layout_height="23dp"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginTop="0dp"
+                                    />
+                                <TextView
+                                    android:id="@+id/lb_BPM"
+                                    android:text="122"
+                                    android:gravity="right"
+                                    android:layout_width="44dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="45dp"
+                                    android:layout_marginLeft="46dp"
+                                    android:textSize="14sp"
+                                    android:textColor="#5f5f5f"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_centerInParent="true"
+                                    />
+                                <TextView
+                                    android:id="@+id/lb_BPM_Title"
+                                    android:text="BPM"
+                                    android:layout_width="44dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="45dp"
+                                    android:textSize="14sp"
+                                    android:textColor="#5f5f5f"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_marginLeft="110dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_centerInParent="true"
+                                    />
+                            </RelativeLayout>
+                        </TableRow>
+                    </TableLayout>
                 </RelativeLayout>>
             </RelativeLayout>>
             //第三區塊
@@ -651,6 +777,13 @@
                             android:layout_width="31dp"
                             android:layout_height="28dp"
                             />
+                        <ImageView
+                            android:id="@+id/star_10"
+                            android:src="@drawable/star_hide"
+                            android:scaleType="centerInside"
+                            android:layout_width="31dp"
+                            android:layout_height="28dp"
+                            />
 
                     </TableRow>
 
@@ -662,7 +795,7 @@
     </ScrollView>>
     //Navigation Bar
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="360dp"
+        android:layout_width="wrap_content"
         android:layout_height="44dp"
         android:background="#ffffff"
         android:layout_alignParentLeft="true"
@@ -679,6 +812,7 @@
             android:gravity="center_horizontal"
             android:layout_marginTop="12dp"
             android:textSize="20sp"
+            android:layout_centerInParent="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"

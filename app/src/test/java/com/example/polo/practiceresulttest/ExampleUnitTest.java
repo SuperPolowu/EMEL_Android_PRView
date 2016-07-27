@@ -1,4 +1,4 @@
-package com.example.polo.practionresulttest;
+package com.example.polo.practiceresulttest;
 
 import org.junit.Test;
 

@@ -1,3 +1,17 @@
 <resources>
+    //挑戰成績單
     <string name="app_name">PractionResultTest</string>
+    <string name="rating6">Awesome</string>
+    <string name="rating5">Great</string>
+    <string name="rating4">Good</string>
+    <string name="rating3">Fair</string>
+    <string name="rating2">Mediocre</string>
+    <string name="rating1">No good</string>
+    <string name="below50">Below 50</string>
+    <string name="Play_result">Play result for this challenge session</string>
+    <string name="Overall">Overall</string>
+    <string name="Accuracy">Accuracy</string>
+    <string name="Completion">Completion</string>
+    <string name="Target">Target to win a Trophies</string>
+    <string name="Minutes">Minutes</string>
 </resources>
