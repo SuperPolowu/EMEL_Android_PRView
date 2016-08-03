@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
     void onButtonClick() {
 
         Intent intent = new Intent(this, PracticeResultView.class);
-        intent.putExtra("level", 6);
-        intent.putExtra("total_practiceTime", 11900);
+        intent.putExtra("level", 1);
+        intent.putExtra("total_practiceTime", 1190);
         intent.putExtra("average", 77);
         intent.putExtra("accuracy", 77);
         intent.putExtra("completion", 100);
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("score_Title", "巴赫初步鋼琴曲集上冊No.1小步舞曲");
         intent.putExtra("composer", "巴赫");
         intent.putExtra("record_path", "....");
-        intent.putExtra("star",10);
+        intent.putExtra("star",6);
         startActivity(intent);
 
     }

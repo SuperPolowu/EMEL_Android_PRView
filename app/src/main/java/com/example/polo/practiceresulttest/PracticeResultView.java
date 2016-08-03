@@ -3,15 +3,17 @@ package com.example.polo.practiceresulttest;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Build;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.util.Log;
 import android.widget.ImageView;
-
-import java.lang.reflect.Array;
+import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import java.util.Date;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
@@ -20,7 +22,6 @@ import android.widget.FrameLayout;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
 import android.media.MediaPlayer;
 
 import com.example.polo.practionresulttest.R;
@@ -136,7 +137,6 @@ public class PracticeResultView extends AppCompatActivity {
 
         setAccuracy();
         setCompletion();
-
         setAverage();
     }
 
@@ -171,36 +171,96 @@ public class PracticeResultView extends AppCompatActivity {
     }
 
     private void setAverage() {
-        String averageStr;
+
         if (average < 50) {
-            averageStr = "50\n以下";
+            lb_Average.setText(getString(R.string.below50));
         } else {
-            averageStr = String.valueOf(average);
+            lb_Average.setText(String.valueOf(average));
         }
-        lb_Average.setText(averageStr);
+
+
+
+
         setFace(FaceEnum.averageFace, average);
+        setProgress(FaceEnum.averageFace, average);
+
+
 
     }
 
     private void setAccuracy() {
 
         if (accuracy<50){
-            lb_Accuracy.setText("50\n以下");
+            lb_Accuracy.setText(getString(R.string.below50));
         }else{
             lb_Accuracy.setText(String.valueOf(accuracy));
         }
 
         setFace(FaceEnum.accuracyFace, accuracy);
+        setProgress(FaceEnum.accuracyFace, accuracy);
     }
 
     private void setCompletion() {
         if (completion<50){
-            lb_Completion.setText("50\n以下");
+            lb_Completion.setText(getString(R.string.below50));
         }else{
             lb_Completion.setText(String.valueOf(completion));
         }
 
         setFace(FaceEnum.completionFace, completion);
+        setProgress(FaceEnum.completionFace, completion);
+    }
+
+    private void setProgress(FaceEnum p_FaceType , int p_number){
+        float score = 0;
+        if (p_number > 0 && (p_number - 50) > 0) {
+            score = (p_number - 50) / 10;
+            float remainsOfCompletion = (p_number - 50) % 10;
+            if (remainsOfCompletion > 0) {
+                score += 1;
+            }
+
+        } else {
+            score = 0;
+
+        }
+        int tag = 0;
+        switch (p_FaceType) {
+
+            case averageFace:
+                tag = 0;
+                break;
+            case accuracyFace:
+                tag = 10;
+                break;
+            case completionFace:
+                tag = 20;
+                break;
+            default:
+
+        }
+        final int time =(int)score*500;
+        final int length =(int)score;
+        int progress_Bg_Id = getResources().getIdentifier("progress" + (1 + tag) + "_Bg", "id", getPackageName());
+        int progress_Id = getResources().getIdentifier("progress" + (1 + tag), "id", getPackageName());
+        final ImageView progress_Bg = (ImageView) findViewById(progress_Bg_Id);
+        final ImageView progress = (ImageView) findViewById(progress_Id);
+        ViewTreeObserver vto = progress_Bg.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                int width  = progress_Bg.getMeasuredWidth();
+                ResizeWidthAnimation anim = new ResizeWidthAnimation(progress, (width / 5) * length);
+                anim.setDuration(time);
+                progress.startAnimation(anim);
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+                    progress_Bg.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                } else {
+                    progress_Bg.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                }
+            }
+        });
+
     }
 
     private void setFace(FaceEnum p_FaceType, int p_number) {
@@ -240,19 +300,8 @@ public class PracticeResultView extends AppCompatActivity {
             default:
 
         }
-        int progress_Bg_Id = getResources().getIdentifier("progress" + (1 + tag) + "_Bg", "id", getPackageName());
-        int progress_Id = getResources().getIdentifier("progress" + (1 + tag), "id", getPackageName());
-        ImageView progress_Bg = (ImageView) findViewById(progress_Bg_Id);
-        ImageView progress = (ImageView) findViewById(progress_Id);
-        FrameLayout.LayoutParams progress_Bg_Params = (FrameLayout.LayoutParams) progress_Bg.getLayoutParams();
-        FrameLayout.LayoutParams progress_Params = (FrameLayout.LayoutParams) progress.getLayoutParams();
-
-//        progress_Params.width=(progress_Bg_Params.width/5)*(int)score;
 
 
-        ResizeWidthAnimation anim = new ResizeWidthAnimation(progress, (progress_Bg_Params.width / 5) * (int) score);
-        anim.setDuration(500 * (int) score);
-        progress.startAnimation(anim);
 
 
         for (int i = 1; i <= 5; i++) {
@@ -284,12 +333,20 @@ public class PracticeResultView extends AppCompatActivity {
         ResizeWidthAnimation anim = new ResizeWidthAnimation(xp_Progress, (int) (((float) xp_Progress_Bg＿Params.width / 100) * xp_Percentage));
         anim.setDuration(1000);
         xp_Progress.startAnimation(anim);
-        characterDistance = (((float) xp_Progress_Bg＿Params.width / 100) * xp_Percentage - xp_Character＿Params.width / 2);
+        if (thresholdXPScore==1){
+            characterDistance=xp_Progress_Bg＿Params.width-(xp_Character＿Params.width+5);
+        }else{
+
+            characterDistance = (((float) xp_Progress_Bg＿Params.width / 100) * xp_Percentage )-(xp_Character＿Params.width+5);
+        }
+
         if (characterDistance < 0) characterDistance = 0;
 
         xp_Character.setBackgroundResource(R.drawable.character_progress_animation);
         animationCharacter = (AnimationDrawable) xp_Character.getBackground();
-
+        Log.d("xp_Percentage",String.valueOf(xp_Percentage));
+        Log.d("width",String.valueOf(xp_Progress_Bg＿Params.width));
+        Log.d("鱷魚跑哪去",String.valueOf(characterDistance));
         Animation am = new TranslateAnimation(0.0f, characterDistance, 0.0f, 0.0f);
         am.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -332,7 +389,6 @@ public class PracticeResultView extends AppCompatActivity {
         for (int i = 1; i <=10; i++) {
             if (p_Star >= i) {
                 int resId = getResources().getIdentifier("star_" + i, "id", getPackageName());
-
                 ImageView star = (ImageView) findViewById(resId);
                 star.setImageResource(star_normal_ID);
             } else {
@@ -341,8 +397,7 @@ public class PracticeResultView extends AppCompatActivity {
                 ImageView star = (ImageView) findViewById(resId);
                 star.setImageResource(star_hide_ID);
                 if (p_Max_Star < i) {
-
-                    star.setVisibility(View.INVISIBLE);
+                    star.setVisibility(View.GONE);
 
                 }
             }
